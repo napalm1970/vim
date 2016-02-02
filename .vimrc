@@ -45,3 +45,7 @@ Plugin 'flazz/vim-colorschemes'
 call vundle#end()
 filetype plugin indent on
 
+" Backups
+set backupdir=~/.vim/vimbckup//
+set directory=~/yvim/vimbckup//
+set viewdir=~/.vim/vimbckup//
