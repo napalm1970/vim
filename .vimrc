@@ -35,13 +35,19 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'tomasr/molokai'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Shougo/neocomplcache'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/vimshell'
 Plugin 'Shougo/neosnippet-snippets'
+Plugin 'Shougo/vimproc'
+Plugin 'osyo-manga/vim-marching'
+Plugin 'thinca/vim-quickrun'
+
+
+
 
 call vundle#end()
 filetype plugin indent on
@@ -133,4 +139,61 @@ set nobackup
              " https://github.com/c9s/perlomni.vim
              let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
+" Snippets
+"
+" Plugin key-mappings.
+ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
+ " SuperTab like snippets behavior.
+" "imap <expr><TAB>
+" " \ pumvisible() ? "\<C-n>" :
+" " \ neosnippet#expandable_or_jumpable() ?
+" " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+ " For conceal markers.
+ if has('conceal')
+   set conceallevel=2 concealcursor=niv
+   endif
+
+"Marching
+"
+" clang コマンドの設定
+let g:marching_clang_command = "/usr/bin/clang"
+"
+" " オプションを追加する
+" " filetype=cpp に対して設定する場合
+ let g:marching#clang_command#options = {
+ \   "cpp" : "-std=gnu++1y"
+ \}
+
+" インクルードディレクトリのパスを設定
+ let g:marching_include_paths = [
+ \   "/usr/include/c++/5.3.0",
+ \   "/usr/include"
+ \]
+"
+" " neocomplete.vim と併用して使用する場合
+let g:marching_enable_neocomplete = 1
+
+ if !exists('g:neocomplete#force_omni_input_patterns')
+   let g:neocomplete#force_omni_input_patterns = {}
+   endif
+
+   let g:neocomplete#force_omni_input_patterns.cpp =
+       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+"       " 処理のタイミングを制御する
+"       " 短いほうがより早く補完ウィンドウが表示される
+"       " ただし、marching.vim 以外の処理にも影響するので注意する
+       set updatetime=200
+
+"       " オムニ補完時に補完ワードを挿入したくない場合
+       imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
+
+       " キャッシュを削除してからオムに補完を行う
+"       imap <buffer> <C-x><C-x><C-o>
+"       <Plug>(marching_force_start_omni_complete)
