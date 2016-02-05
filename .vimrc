@@ -45,6 +45,7 @@ Plugin 'Shougo/neosnippet-snippets'
 Plugin 'Shougo/vimproc'
 Plugin 'osyo-manga/vim-marching'
 Plugin 'thinca/vim-quickrun'
+Plugin 'osyo-manga/vim-snowdrop'
 
 
 
@@ -197,3 +198,25 @@ let g:marching_enable_neocomplete = 1
        " キャッシュを削除してからオムに補完を行う
 "       imap <buffer> <C-x><C-x><C-o>
 "       <Plug>(marching_force_start_omni_complete)
+
+" Snowdrop
+" set libclang directory path
+ let g:snowdrop#libclang_directory = "/usr/bin/"
+"
+" " set include directory path.
+ let g:snowdrop#include_paths = {
+ \   "cpp" : [
+ \  "/usr/include/c++/5.3.0",
+ \   "/usr/include"
+ \
+ \   ]
+ \}
+
+" set clang command options.
+ let g:snowdrop#command_options = {
+ \   "cpp" : "-std=c++1y",
+ \}
+
+
+
+
