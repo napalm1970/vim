@@ -1,3 +1,4 @@
+let mapleader=","
 set nocompatible
 syntax on
 filetype plugin on
@@ -46,8 +47,11 @@ Plugin 'Shougo/vimproc'
 Plugin 'osyo-manga/vim-marching'
 Plugin 'thinca/vim-quickrun'
 Plugin 'osyo-manga/vim-snowdrop'
-
-
+Plugin 'tpope/vim-surround'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'vim-scripts/buftabs'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 
 
 call vundle#end()
@@ -217,6 +221,28 @@ let g:marching_enable_neocomplete = 1
  \   "cpp" : "-std=c++1y",
  \}
 
+" Buftab
+"
+noremap <F3> :bprev<CR> 
+noremap <F2> :bnext<CR>
 
+" Bufexplorer
 
+nnoremap <silent> <F11> :BufExplorer<CR>
+nnoremap <silent> <s-F11> :ToggleBufExplorer<CR>
+nnoremap <silent> <m-F11> :BufExplorerHorizontalSplit<CR>
+nnoremap <silent> <c-F11> :BufExplorerVerticalSplit<CR>
+
+let g:bufExplorerShowDirectories=1
+let g:bufExplorerSortBy='number'
+let g:bufExplorerShowUnlisted=1
+" let g:bufExplorerShowTabBuffer=1
+let g:bufExplorerSplitBelow=1
+
+" NerdTree
+"
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-e> :NERDTreeToggle<CR>
 
