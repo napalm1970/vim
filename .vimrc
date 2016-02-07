@@ -1,6 +1,7 @@
-let mapleader=","
+"let mapleader=","
 set nocompatible
 syntax on
+execute pathogen#infect()
 filetype plugin on
 set hlsearch
 set incsearch
@@ -52,6 +53,9 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'vim-scripts/buftabs'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'fatih/vim-go'
+Plugin 'majutsushi/tagbar'
+Plugin 'garyburd/go-explorer'
 
 
 call vundle#end()
@@ -107,25 +111,6 @@ set nobackup
 "           " Close popup by <Space>.
 "           "inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
 "
-"           " For cursor moving in insert mode(Not recommended)
-           "inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
-           "inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
-           "inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
-           "inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
-"           " Or set this.
-"           "let g:neocomplcache_enable_cursor_hold_i = 1
-"           " Or set this.
-"           "let g:neocomplcache_enable_insert_char_pre = 1
-"
-"           " AutoComplPop like behavior.
-"           "let g:neocomplcache_enable_auto_select = 1
-"
-"           " Shell like behavior(not recommended).
-"           "set completeopt+=longest
-"           "let g:neocomplcache_enable_auto_select = 1
-"           "let g:neocomplcache_disable_auto_complete = 1
-"           "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
            " Enable omni completion.
            autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
            autocmd FileType html,markdown setlocalomnifunc=htmlcomplete#CompleteTags
@@ -246,3 +231,48 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-e> :NERDTreeToggle<CR>
 
+" Vim-go
+"
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+
+let g:go_bin_path = expand("~/go/bin")
+" let g:go_bin_path = "/home/fatih/.mypath"
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+let g:go_fmt_command="goimports"
+let g:go_auto_type_info=1
+let g:go_metalinter_enabled=['vet', 'golint', 'errcheck']
+let g:go_term_mode="vsplit"
+
+
+
+
+" Tagbar
+
+map <F8> :TagbarToggle<CR>
+
+" Syntatic
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
