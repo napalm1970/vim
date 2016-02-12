@@ -1,7 +1,7 @@
 "let mapleader=","
 set nocompatible
 syntax on
-execute pathogen#infect()
+" execute pathogen#infect()
 filetype plugin on
 set hlsearch
 set incsearch
