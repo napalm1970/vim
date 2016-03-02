@@ -1,20 +1,39 @@
-"let mapleader=","
+set number
+set cursorline
 set nocompatible
+"set cursorcolumn
+set autochdir
 syntax on
-" execute pathogen#infect()
 filetype plugin on
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 set t_Co=256
-colorscheme molokai
+"colorscheme molokai
+colorscheme solarized
 
 set tabstop=4
 set shiftwidth=4
 set smarttab
 set expandtab
 set smartindent
+nnoremap <leader><space> :noh<cr>
+
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+
+" Trailing Whitespace
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
 
 set wrap
 set linebreak
@@ -29,18 +48,18 @@ set showcmd
 set hidden
 set history=1000
 
-set laststatus=2 
+set laststatus=2
 
-" Vundle plugin 
+" Vundle plugin
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'tomasr/molokai'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'Shougo/neocomplcache'
+"Plugin 'Shougo/neocomplcache'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/vimshell'
 Plugin 'Shougo/neosnippet-snippets'
@@ -56,6 +75,24 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
 Plugin 'garyburd/go-explorer'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'justinmk/vim-sneak'
+Plugin 'losingkeys/vim-niji'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'sjl/gundo.vim'
+Plugin 'vim-scripts/Conque-GDB'
+Plugin 'lightxue/SwissCalc'
+Plugin 'mileszs/ack.vim'
+Plugin 'vim-utils/vim-man'
+Plugin 'kien/tabman.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/Conque-Shell'
+
+
 
 
 call vundle#end()
@@ -64,90 +101,10 @@ filetype plugin indent on
 " Backups
 set nobackup
 
-" Neocomplche
-
-" Disable AutoComplPop.
-" let g:acp_enableAtStartup = 0
-" " Use neocomplcache.
- let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
- let g:neocomplcache_enable_smart_case = 1
-" Set minimum syntax keyword length.
- let g:neocomplcache_min_syntax_length = 3
- let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
- let g:neocomplcache_dictionary_filetype_lists = {
-     \ 'default' : '',
-         \ 'vimshell' : $HOME.'/.vimshell_hist',
-             \ 'scheme' : $HOME.'/.gosh_completions'
-                     \ }
-
-" Define keyword.
- if !exists('g:neocomplcache_keyword_patterns')
-     let g:neocomplcache_keyword_patterns = {}
-     endif
-     let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-"
-    " Plugin key-mappings.
-     inoremap <expr><C-g>     neocomplcache#undo_completion()
-     inoremap <expr><C-l>     neocomplcache#complete_common_string()
-"
-     " Recommended key-mappings.
-     " <CR>: close popup and save indent.
-     inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-     function! s:my_cr_function()
-       return neocomplcache#smart_close_popup() . "\<CR>"
-         " For no inserting <CR> key.
-           "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-           endfunction
-"           " <TAB>: completion.
-           inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"           " <C-h>, <BS>: close popup and delete backword char.
-           inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-           inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-           inoremap <expr><C-y>  neocomplcache#close_popup()
-           inoremap <expr><C-e>  neocomplcache#cancel_popup()
-"           " Close popup by <Space>.
-"           "inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
-"
-           " Enable omni completion.
-           autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-           autocmd FileType html,markdown setlocalomnifunc=htmlcomplete#CompleteTags
-           autocmd FileType javascript setlocalomnifunc=javascriptcomplete#CompleteJS
-           autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-           autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-           " Enable heavy omni completion.
-           if !exists('g:neocomplcache_force_omni_patterns')
-             let g:neocomplcache_force_omni_patterns = {}
-             endif
-             let g:neocomplcache_force_omni_patterns.php = '[^.\t]->\h\w*\|\h\w*::'
-             let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:]*\t]\%(\.\|->\)'
-             let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:]*\t]\%(\.\|->\)\|\h\w*::'
-
-             " For perlomni.vim setting.
-             " https://github.com/c9s/perlomni.vim
-             let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-" Snippets
-"
-" Plugin key-mappings.
- imap <C-k>     <Plug>(neosnippet_expand_or_jump)
- smap <C-k>     <Plug>(neosnippet_expand_or_jump)
- xmap <C-k>     <Plug>(neosnippet_expand_target)
-
- " SuperTab like snippets behavior.
-" "imap <expr><TAB>
-" " \ pumvisible() ? "\<C-n>" :
-" " \ neosnippet#expandable_or_jumpable() ?
-" " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
- smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
- \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
- " For conceal markers.
- if has('conceal')
-   set conceallevel=2 concealcursor=niv
-   endif
+" For conceal markers.
+if has('conceal')
+    set conceallevel=2 concealcursor=niv
+endif
 
 "Marching
 "
@@ -156,59 +113,59 @@ let g:marching_clang_command = "/usr/bin/clang"
 "
 " " オプションを追加する
 " " filetype=cpp に対して設定する場合
- let g:marching#clang_command#options = {
- \   "cpp" : "-std=gnu++1y"
- \}
+let g:marching#clang_command#options = {
+            \   "cpp" : "-std=gnu++1y"
+            \}
 
 " インクルードディレクトリのパスを設定
- let g:marching_include_paths = [
- \   "/usr/include/c++/5.3.0",
- \   "/usr/include"
- \]
+let g:marching_include_paths = [
+            \   "/usr/include/c++/5.3.0",
+            \   "/usr/include"
+            \]
 "
 " " neocomplete.vim と併用して使用する場合
 let g:marching_enable_neocomplete = 1
 
- if !exists('g:neocomplete#force_omni_input_patterns')
-   let g:neocomplete#force_omni_input_patterns = {}
-   endif
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
 
-   let g:neocomplete#force_omni_input_patterns.cpp =
-       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+            \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
 "       " 処理のタイミングを制御する
 "       " 短いほうがより早く補完ウィンドウが表示される
 "       " ただし、marching.vim 以外の処理にも影響するので注意する
-       set updatetime=200
+set updatetime=200
 
 "       " オムニ補完時に補完ワードを挿入したくない場合
-       imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
+imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
 
-       " キャッシュを削除してからオムに補完を行う
+" キャッシュを削除してからオムに補完を行う
 "       imap <buffer> <C-x><C-x><C-o>
 "       <Plug>(marching_force_start_omni_complete)
 
 " Snowdrop
 " set libclang directory path
- let g:snowdrop#libclang_directory = "/usr/bin/"
+let g:snowdrop#libclang_directory = "/usr/bin/"
 "
 " " set include directory path.
- let g:snowdrop#include_paths = {
- \   "cpp" : [
- \  "/usr/include/c++/5.3.0",
- \   "/usr/include"
- \
- \   ]
- \}
+let g:snowdrop#include_paths = {
+            \   "cpp" : [
+            \  "/usr/include/c++/5.3.0",
+            \   "/usr/include"
+            \
+            \   ]
+            \}
 
 " set clang command options.
- let g:snowdrop#command_options = {
- \   "cpp" : "-std=c++1y",
- \}
+let g:snowdrop#command_options = {
+            \   "cpp" : "-std=c++1y",
+            \}
 
 " Buftab
 "
-noremap <F3> :bprev<CR> 
+noremap <F3> :bprev<CR>
 noremap <F2> :bnext<CR>
 
 " Bufexplorer
@@ -266,7 +223,41 @@ let g:go_term_mode="vsplit"
 
 map <F8> :TagbarToggle<CR>
 
-" Syntatic
+"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+"" Disable AutoComplPop.
+let g:asyntasticcp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" " Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" " Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+            \ 'default' : '',
+            \ 'vimshell' : $HOME.'/.vimshell_hist',
+            \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" " <C-h>, <BS>: close popup and delete basyntasticckword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -274,5 +265,85 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:sysyntasticntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+
+let g:sneak#streak = 1
+
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
+xmap f <Plug>Sneak_s
+xmap F <Plug>Sneak_S
+omap f <Plug>Sneak_s
+omap F <Plug>Sneak_S
+
+"let g:niji_match_all_filetypes = 2
+
+"let g:niji_matching_characters = [['(', ')'],
+            "\ ['\[', '\]'],
+            "\ ['<', '>']]
+
+let g:startify_session_dir = '~/.vim/session'
+let g:startify_list_order = ['files', 'dir', 'bookmarks', 'sessions']
+let g:startify_bookmarks = [ {'v': '~/.vimrc'}, '~/.zshrc' ]
+
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>  <Plug>(neosnippet_expand_target)
+
+"let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+
+" Syntatic
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+let g:syntastic_c_checkers=['clang']
+
+nnoremap <F5> :GundoToggle<CR>
+
+let g:tabman_toogle='<leader>mt'
+let g:tabman_focus='<leader>mf'
+
+
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+let g:rbpt_max = 16
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+nnoremap th  :tabfirst<CR>
+nnoremap tj  :tabprev<CR>
+nnoremap tk  :tabnext<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnew<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
