@@ -19,7 +19,6 @@ Plugin 'xolox/vim-misc'
 Plugin 'luochen1990/rainbow'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
-" Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'tpope/vim-surround'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'klen/python-mode'
@@ -41,7 +40,7 @@ filetype plugin indent on
 
 syntax on
 
-autocmd! bufwritepost .vimrc source % 
+autocmd! bufwritepost .vimrc source %
 " set omnifunc=syntaxcomplete#Complete
 set number
 set expandtab
@@ -162,11 +161,6 @@ let g_pymode_doc_ley = 'K'
 let g:pymode_folding = 0
 
 
-" nnoremap <F5> :ConqueTermSplit ipython<CR>
-
-" set omnifunc=htmlcomplete#CompleteTags
-
-
 let g:user_emmet_install_global = 0
 autocmd FileType htmll,css EmmetInstall
 
@@ -188,5 +182,14 @@ map <Leader>n <esc>:tabprevious<cr>
 map <Leader>m <esc>:tabnext<cr>
 map <Leader>o <esc>:tabnew<cr>
 map <Leader>e <esc>:tabclose<cr>
+
+map <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+nmap <eader>s <Plug>(easymotion-overwin-f2)
+map <Leader>L <Plug>(easymotion-overwin-line)
+nmap <Leader>L <Plug>(easymotion-bd-jk)
+map <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
 
 
