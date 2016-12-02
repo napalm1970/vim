@@ -44,6 +44,8 @@ autocmd! bufwritepost .vimrc source %
 " set omnifunc=syntaxcomplete#Complete
 set number
 set expandtab
+set shiftwidth=4
+set softtabstop=4
 set tabstop=4
 set hlsearch
 set incsearch
