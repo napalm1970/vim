@@ -10,15 +10,14 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-" Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'bling/vim-airline'
-Plugin 'xolox/vim-lua-ftplugin'
-Plugin 'xolox/vim-lua-inspect'
+" Plugin 'xolox/vim-lua-ftplugin'
+" Plugin 'xolox/vim-lua-inspect'
 Plugin 'xolox/vim-misc'
 Plugin 'luochen1990/rainbow'
 Plugin 'vim-airline/vim-airline-themes'
@@ -36,6 +35,7 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'flomotlik/vim-livereload'
 Plugin 'lordm/vim-browser-reload-linux'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'lilydjwg/colorizer'
 
 
 call vundle#end()
@@ -196,6 +196,5 @@ map <Leader>L <Plug>(easymotion-overwin-line)
 nmap <Leader>L <Plug>(easymotion-bd-jk)
 map <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
-
 
 
