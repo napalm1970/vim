@@ -1,7 +1,7 @@
 set nocompatible
 filetype off
 
-" mkdir ~/.v9m/{bundle}
+" mkdir ~/.vim/{bundle}
 " git clone https://github.com/VundleVim/Vundle.vim.git
 " ~/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/Vundle.vim
