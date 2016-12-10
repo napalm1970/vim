@@ -32,6 +32,7 @@ Plugin 'flomotlik/vim-livereload'
 Plugin 'lordm/vim-browser-reload-linux'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'lilydjwg/colorizer'
+Plugin 'myusuf3/numbers.vim'
 
 
 call vundle#end()
@@ -54,6 +55,7 @@ set smartcase
 set t_Co=256
 set smarttab
 set smartindent
+set noswapfile
 let mapleader = ","
 
 nnoremap j gj
@@ -193,4 +195,4 @@ nmap <Leader>L <Plug>(easymotion-bd-jk)
 map <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
-
+let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
